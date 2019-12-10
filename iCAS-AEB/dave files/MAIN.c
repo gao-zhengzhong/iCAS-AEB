@@ -27,6 +27,7 @@
 //****************************************************************************
 
 #include "MAIN.h"
+#include "iCasBrake.h"
 
 // USER CODE BEGIN (MAIN_General,2)
 
@@ -373,14 +374,14 @@ void main(void)
   // USER CODE END
 
   MAIN_vInit();
-
-  EepRom_Init(0xC40000);
+  AebInit();
   // USER CODE BEGIN (Main,3)
   ISOInit_v_g();//≥ı ºªØ
-
-  Adc_Init();
-  FLTD_Init();
   TimingStart_v_g();
+  PID_init();
+  MCTimer = 0;
+  MotorPwm_Ctrl=2048;
+  APA_Count = 0;
   // USER CODE END
 
   while(1)

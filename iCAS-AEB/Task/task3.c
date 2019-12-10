@@ -24,7 +24,6 @@
 
 
 INT8U Task3SchedCnt=0;
-INT8U xxmsg[8] = {1,2,3,4,5,6,7,8};
 /*
 *********************************************************************************************************
 *                                          FUNCTION PROTOTYPES
@@ -83,10 +82,7 @@ void task3(void)
 	break;
 
 	}
-	#if 0
 	Can1RecDeal_v_g();//整车CAN接收数据处理 CAN1
-	#endif
-//	CanSendMsg_v_g(10,xxmsg,8);
 	ccploop_v_g();//CCP协议标定
 }
 /*!************************************************************************************
@@ -255,6 +251,8 @@ void task3Normal_v_s(void)
 
 	     case 2:
 	    	 Tempreture_AD=SingleADSample_v_g(0,DRIVER_TEMP_SAMPLE_ADC0);//温度采样
+
+	    	 RealTempreture=Account_temp(Tempreture_AD);
 	            break;
 
 	     case 3:

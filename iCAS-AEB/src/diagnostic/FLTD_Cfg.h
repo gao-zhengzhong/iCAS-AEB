@@ -5,13 +5,13 @@
 
 typedef struct
 {
-	const FLTD_U8 periodtime; 	/* count * basetime */
-	const FLTD_U8 losttimeOut;	/* count * basetime */
-	const FLTD_U8 recovertime;	/* count * basetime */
+	const FLT_U8 periodTime; 	/* count * basetime */
+	const FLT_U8 lostTimeOut;	/* count * basetime */
+	const FLT_U8 recoverTime;	/* count * basetime */
 
-	FLTD_U8 SigPresentFlag;
-	FLTD_U8 SigCheckErrorFlag;
-	FLTD_U8 SigFaultFlag;
+	FLT_U8 sigPresentFlag;
+	FLT_U8 sigCheckErrorFlag;
+	FLT_U8 sigFaultFlag;
 
 } FLTD_SigMonitorCfgType;
 
@@ -31,46 +31,48 @@ FLTD_SigMonitorCfgType FLTD_SigMonitorCfg[FLTD_SIG_MAX] =
 
 /* AD samples values is divided into five, in order to stop, low, normal, high, over, etc */
 //---------- stop_t ----------------- low_t ------  high_t ------------------- over_t ---
-//             |         |   low_hyst   |			 |	  high_hyst	 |          |   
+//             |         |   lowHyst    |			 |	  highHyst	 |          |   
 //			   |	     |			    |			 |				 |		    |
 //     stop	   |   low      low/normal  |  normal	 | 	 normal/high     high   |	over
 //---------------------------------------------------------------------------------------
 typedef struct
 {
-	const FLTD_U16 stop_threshold;
-	const FLTD_U16 low_threshold;
-	const FLTD_U16 high_threshold;
-	const FLTD_U16 over_threshold;
+	const FLT_U16 stopThreshold;
+	const FLT_U16 lowThreshold;
+	const FLT_U16 highThreshold;
+	const FLT_U16 overThreshold;
 
-	const FLTD_U16 low_hyst;
-	const FLTD_U16 high_hyst;
-	const FLTD_U16 filtertime; 		/* count * basetime */
+	const FLT_U16 lowHyst;
+	const FLT_U16 highHyst;
+	const FLT_U16 filterTime; 		/* count * basetime */
 
-	FLTD_U16* adcValue;
+	FLT_U16* adcValue;
 
 } FLTD_AdcMonitorCfgType;
 
 FLTD_AdcMonitorCfgType FLTD_AdcMonitorCfg[FLTD_ADC_MAX] =
 {
 	
-// /*stop_t*/ /*low_t*/ /*high_t*/ /*over_t*/ /*low_hyst*/ /*high_hyst*/ /*filter*/  /*location in the struct tAdcSample*/
-
-	{200,	460,	820,	840,	10,		10,		10,	(FLTD_U16*)&tAdcSample + 0},
-	{102,	417,	964,	1005, 162,	38, 	10, (FLTD_U16*)&tAdcSample + 1},
-	{80,	220,	300,	340, 	10,		10,		10, (FLTD_U16*)&tAdcSample + 2},
-	{10,	102,	921,	950, 	10,		10,		10, (FLTD_U16*)&tAdcSample + 3},
-	{10,	102,	921,	950, 	10,		10,		10, (FLTD_U16*)&tAdcSample + 4},
-	{80,	220,	300,	340, 	10,		10,		10, (FLTD_U16*)&tAdcSample + 5},
-	{10,	102,	921,	950,	10,		10,		10, (FLTD_U16*)&tAdcSample + 6},
-	{10,	102,	921,	950,	10,		10,		10, (FLTD_U16*)&tAdcSample + 7},
-	{80,	102,	921,	940, 	10,		10,		10, (FLTD_U16*)&tAdcSample + 8},
+// /*stop_t*/ /*low_t*/ /*high_t*/ /*over_t*/ /*lowHyst*/ /*highHyst*/ /*filter*/  /*location in the struct tAdcSample*/
 	
-	{40,	45,		55,	 	60, 	3,		3, 		10, (FLTD_U16*)&tAdcSample + 9},
-	{80,	220,	300,	340, 	10,		10,		10, (FLTD_U16*)&tAdcSample + 10},
-	{80,	220,	300,	340, 	10,		10,		10, (FLTD_U16*)&tAdcSample + 11},
-	{80,	220,	300,	340, 	10,		10,		10, (FLTD_U16*)&tAdcSample + 12},
-	{80,	220,	300,	340, 	10,		10,		10, (FLTD_U16*)&tAdcSample + 13}
+	{200,	460,	820,	840,	10,		10,		10,	(FLT_U16*)&tAdcSample + 0},	//FLTD_ADC_ECU_VOLTAGE
+	{102,	417,	964,	1005, 	162,	38, 	10, (FLT_U16*)&tAdcSample + 1},	//FLTD_ADC_ENV_TEMPERATURE
+	{80,	220,	300,	340, 	10,		10,		10, (FLT_U16*)&tAdcSample + 2},	//FLTD_ADC_PEDAL_SENSOR_VOLTAGE
+	{10,	102,	921,	950, 	10,		10,		10, (FLT_U16*)&tAdcSample + 3},	//FLTD_ADC_PEDAL_SENSOR_SIG1
+	{10,	102,	921,	950, 	10,		10,		10, (FLT_U16*)&tAdcSample + 4},	//FLTD_ADC_PEDAL_SENSOR_SIG2
+	{80,	220,	300,	340, 	10,		10,		10, (FLT_U16*)&tAdcSample + 6},	//FLTD_ADC_MAIN_CYLINDER_VOLTAGE
+	{10,	102,	921,	950,	10,		10,		10, (FLT_U16*)&tAdcSample + 7},	//FLTD_ADC_MAIN_CYLINDER_SIG1
+	{10,	102,	921,	950,	10,		10,		10, (FLT_U16*)&tAdcSample + 8},	//FLTD_ADC_MAIN_CYLINDER_SIG2
+	{80,	102,	921,	940, 	10,		10,		10, (FLT_U16*)&tAdcSample + 10},	//FLTD_ADC_CURRENT_SENSOR_SIG
 	
+	{40,	45,		55,	 	60, 	3,		3, 		10, (FLT_U16*)&tAdcSample + 11},	//FLTD_ADC_VLINK_VOLTAGE
+	{80,	220,	300,	340, 	10,		10,		10, (FLT_U16*)&tAdcSample + 12},	//FLTD_ADC_A_PHASE_VOLTAGE
+	{80,	220,	300,	340, 	10,		10,		10, (FLT_U16*)&tAdcSample + 13},	//FLTD_ADC_B_PHASE_VOLTAGE
+	
+#if (1 == PRESSURE_SENSOR_SUPPORT_OR_NOT)
+	{80,	220,	300,	340, 	10,		10,		10, (FLT_U16*)&tAdcSample + 14},	//FLTD_ADC_PRESSURE_SENSOR_VOLTAGE
+	{80,	220,	300,	340, 	10,		10,		10, (FLT_U16*)&tAdcSample + 15}	//FLTD_ADC_PRESSURE_SENSOR_SIG
+#endif
 };
 
 #endif

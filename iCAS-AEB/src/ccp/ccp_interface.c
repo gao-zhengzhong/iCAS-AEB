@@ -24,8 +24,8 @@ BYTE ccpSend( BYTEPTR msg )							// #define BYTEPTR unsigned char*
 {
 
 	// callup CAN-send调用CAN发送程序in“boot_can.c”
-	//CanRecMsg_v_g(2,msg,8);
-	CanRecMsg_v_g(10,msg,8);
+	//CanSendMsg_v_g(2,msg,8);
+	CanSendMsg_v_g(10,msg,8);
 	return 1;
 }
 // -----------------------------------------------------------------------------

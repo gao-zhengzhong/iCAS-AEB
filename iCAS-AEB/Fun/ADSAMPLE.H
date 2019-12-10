@@ -65,25 +65,33 @@
 #define WATCHDOG_ERR_SIGNEL   INIO_P4_3//狗状态信号
 #define FEED_WATCHDOG   TOGGLEIO_P10_1 //喂狗信号输出
 
-
-
-
 AD_SAMPLE_EXT INT16U  MotorPwm_Ctrl;//输出占空比信号
-AD_SAMPLE_EXT INT16U  Motor_Cur; //电流信号变量
+
 AD_SAMPLE_EXT INT8U   PrsPwrfail;//压力传感器电源检测状态
 AD_SAMPLE_EXT INT16U  PrsPwr_AD; //压力传感器电源变量
-AD_SAMPLE_EXT INT16U  BrakePressure_AD;//压力传感器AD变量
+
 AD_SAMPLE_EXT INT8U   MasterPwrfail;   //踏板传感器电源检测状态
 AD_SAMPLE_EXT INT16U  MasterPwr_AD;    //踏板传感器电源变量
 
-AD_SAMPLE_EXT INT16U  Mastercyler_AD1;//主缸行程AD1值
-AD_SAMPLE_EXT INT16U  Mastercyler_AD2;//主缸行程AD2值
+AD_SAMPLE_EXT INT16S  Motor_Cur_AD; //电流信号变量
+AD_SAMPLE_EXT INT16S  Motor_Cur_ADLast; //电流信号变量
+
+AD_SAMPLE_EXT INT16S  BrakePressure_AD;//压力传感器AD变量
+AD_SAMPLE_EXT INT16S  BrakePressure_ADLast;
+
+AD_SAMPLE_EXT INT16S  Mastercyler_AD1;//主缸行程AD1值
+AD_SAMPLE_EXT INT16S  Mastercyler_AD1Last;
+AD_SAMPLE_EXT INT16S  Mastercyler_AD2;//主缸行程AD2值
+AD_SAMPLE_EXT INT16S  Mastercyler_AD2Last;
+
+AD_SAMPLE_EXT INT16S  Pedal_location_AD1;//踏板行程AD1变量
+AD_SAMPLE_EXT INT16S  Pedal_location_AD1Last;
+AD_SAMPLE_EXT INT16S  Pedal_location_AD2;//踏板行程AD2变量
+AD_SAMPLE_EXT INT16S  Pedal_location_AD2Last;
 
 AD_SAMPLE_EXT INT8U   PedalPwrfail;//踏板传感器电源检测状态
 AD_SAMPLE_EXT INT16U  PedalPwr_AD;//踏板传感器电源变量
 
-AD_SAMPLE_EXT INT16U  Pedal_location_AD1;//踏板行程AD1变量
-AD_SAMPLE_EXT INT16U  Pedal_location_AD2;//踏板行程AD2变量
 AD_SAMPLE_EXT INT8U   BrakeLight;     //制动灯控制变量
 AD_SAMPLE_EXT INT8U   BrakeSW;        //制动踏板开关信号变量
 AD_SAMPLE_EXT INT8U   Resrd12VPwrFail;//12V电源状态
@@ -99,9 +107,7 @@ AD_SAMPLE_EXT INT8U   Can0Rec1data[64][8];//CAN0接收数据存放数组
 AD_SAMPLE_EXT INT8U   Can0Revdata[4][8];  //CAN0发送数据存放数组
 
 AD_SAMPLE_EXT INT8U   Can1Recdata[10][8]; //CAN1接收数据存放数组
-AD_SAMPLE_EXT INT8U   Can1Revdata[4][8];  //CAN1发送数据存放数组
-
-
+AD_SAMPLE_EXT INT8U   Can1Revdata[6][8];  //CAN1发送数据存放数组
 
 AD_SAMPLE_EXT INT16U  VlinkPwr_AD;  //母线电压AD值
 AD_SAMPLE_EXT INT16U  AphasePwr_AD; //A相电电压AD值

@@ -3,6 +3,8 @@
  *
  *  Created on: 2015-5-21
  *      Author: zhangguangyao
+ *  CAN0接控制CAN，获取毫米波雷达、MB摄像头数据，控制器从CAN0对外发调试数据
+ *  CAN1接  整车KAN，获取车速和方向盘转角信息
  */
 
 #ifndef BUS_LINE_H_
@@ -14,103 +16,113 @@
 	#define  BUS_LINE_EXT  extern
 #endif
 
-#define REC_CAN0ID_0   1 //CAN0 Receive CANID 11Bit  Can0Rec0data[0][0]-Can0Rec0data[0][7]
-#define REC_CAN0ID_1   2  //CAN0 Receive CANID 11Bit  Can0Rec0data[1][0]-Can0Rec0data[1][7]
-#define REC_CAN0ID_2   3  //CAN0 Receive CANID 11Bit  Can0Rec0data[2][0]-Can0Rec0data[2][7]
-#define REC_CAN0ID_3   4  //CAN0 Receive CANID 11Bit  Can0Rec0data[3][0]-Can0Rec0data[3][7]
-#define REC_CAN0ID_4   5  //CAN0 Receive CANID 11Bit  Can0Rec0data[4][0]-Can0Rec0data[4][7]
-#define REC_CAN0ID_5   6  //CAN0 Receive CANID 11Bit  Can0Rec0data[5][0]-Can0Rec0data[5][7]
-#define REC_CAN0ID_6   7  //CAN0 Receive CANID 11Bit  Can0Rec0data[6][0]-Can0Rec0data[6][7]
-#define REC_CAN0ID_7   8  //CAN0 Receive CANID 11Bit  Can0Rec0data[7][0]-Can0Rec0data[7][7]
-#define REC_CAN0ID_8   9  //CAN0 Receive CANID 11Bit  Can0Rec0data[8][0]-Can0Rec0data[8][7]
-#define REC_CAN0ID_9   10 //CAN0 Receive CANID 11Bit  Can0Rec0data[9][0]-Can0Rec0data[9][7]
-#define REC_CAN0ID_10  11 //CAN0 Receive CANID 11Bit  Can0Rec0data[10][0]-Can0Rec0data[10][7]
-#define REC_CAN0ID_11  12 //CAN0 Receive CANID 11Bit  Can0Rec0data[11][0]-Can0Rec0data[11][7]
-#define REC_CAN0ID_12  13 //CAN0 Receive CANID 11Bit  Can0Rec0data[12][0]-Can0Rec0data[12][7]
-#define REC_CAN0ID_13  14 //CAN0 Receive CANID 11Bit  Can0Rec0data[13][0]-Can0Rec0data[13][7]
-#define REC_CAN0ID_14  15 //CAN0 Receive CANID 11Bit  Can0Rec0data[14][0]-Can0Rec0data[14][7]
-#define REC_CAN0ID_15  16 //CAN0 Receive CANID 11Bit  Can0Rec0data[15][0]-Can0Rec0data[15][7]
-#define REC_CAN0ID_16  17 //CAN0 Receive CANID 11Bit  Can0Rec0data[16][0]-Can0Rec0data[16][7]
-#define REC_CAN0ID_17  18 //CAN0 Receive CANID 11Bit  Can0Rec0data[17][0]-Can0Rec0data[17][7]
-#define REC_CAN0ID_18  19 //CAN0 Receive CANID 11Bit  Can0Rec0data[18][0]-Can0Rec0data[18][7]
-#define REC_CAN0ID_19  20 //CAN0 Receive CANID 11Bit  Can0Rec0data[19][0]-Can0Rec0data[19][7]
-#define REC_CAN0ID_20  21 //CAN0 Receive CANID 11Bit  Can0Rec0data[20][0]-Can0Rec0data[20][7]
-#define REC_CAN0ID_21  22 //CAN0 Receive CANID 11Bit  Can0Rec0data[21][0]-Can0Rec0data[21][7]
-#define REC_CAN0ID_22  23 //CAN0 Receive CANID 11Bit  Can0Rec0data[22][0]-Can0Rec0data[22][7]
-#define REC_CAN0ID_23  24 //CAN0 Receive CANID 11Bit  Can0Rec0data[23][0]-Can0Rec0data[23][7]
-#define REC_CAN0ID_24  25 //CAN0 Receive CANID 11Bit  Can0Rec0data[24][0]-Can0Rec0data[24][7]
-#define REC_CAN0ID_25  26 //CAN0 Receive CANID 11Bit  Can0Rec0data[25][0]-Can0Rec0data[25][7]
-#define REC_CAN0ID_26  27 //CAN0 Receive CANID 11Bit  Can0Rec0data[26][0]-Can0Rec0data[26][7]
-#define REC_CAN0ID_27  28 //CAN0 Receive CANID 11Bit  Can0Rec0data[27][0]-Can0Rec0data[27][7]
-#define REC_CAN0ID_28  29 //CAN0 Receive CANID 11Bit  Can0Rec0data[28][0]-Can0Rec0data[28][7]
-#define REC_CAN0ID_29  30 //CAN0 Receive CANID 11Bit  Can0Rec0data[29][0]-Can0Rec0data[29][7]
-#define REC_CAN0ID_30  31 //CAN0 Receive CANID 11Bit  Can0Rec0data[30][0]-Can0Rec0data[30][7]
-#define REC_CAN0ID_31  32 //CAN0 Receive CANID 11Bit  Can0Rec0data[31][0]-Can0Rec0data[31][7]
-#define REC_CAN0ID_32  33 //CAN0 Receive CANID 11Bit  Can0Rec0data[32][0]-Can0Rec0data[32][7]
-#define REC_CAN0ID_33  34 //CAN0 Receive CANID 11Bit  Can0Rec0data[33][0]-Can0Rec0data[33][7]
-#define REC_CAN0ID_34  35 //CAN0 Receive CANID 11Bit  Can0Rec0data[34][0]-Can0Rec0data[34][7]
-#define REC_CAN0ID_35  36 //CAN0 Receive CANID 11Bit  Can0Rec0data[35][0]-Can0Rec0data[35][7]
-#define REC_CAN0ID_36  37 //CAN0 Receive CANID 11Bit  Can0Rec0data[36][0]-Can0Rec0data[36][7]
-#define REC_CAN0ID_37  38 //CAN0 Receive CANID 11Bit  Can0Rec0data[37][0]-Can0Rec0data[37][7]
-#define REC_CAN0ID_38  39 //CAN0 Receive CANID 11Bit  Can0Rec0data[38][0]-Can0Rec0data[38][7]
-#define REC_CAN0ID_39  40 //CAN0 Receive CANID 11Bit  Can0Rec0data[39][0]-Can0Rec0data[39][7]
-#define REC_CAN0ID_40  41 //CAN0 Receive CANID 11Bit  Can0Rec0data[40][0]-Can0Rec0data[40][7]
-#define REC_CAN0ID_41  42 //CAN0 Receive CANID 11Bit  Can0Rec0data[41][0]-Can0Rec0data[41][7]
-#define REC_CAN0ID_42  43 //CAN0 Receive CANID 11Bit  Can0Rec0data[42][0]-Can0Rec0data[42][7]
-#define REC_CAN0ID_43  44 //CAN0 Receive CANID 11Bit  Can0Rec0data[43][0]-Can0Rec0data[43][7]
-#define REC_CAN0ID_44  45 //CAN0 Receive CANID 11Bit  Can0Rec0data[44][0]-Can0Rec0data[44][7]
-#define REC_CAN0ID_45  46 //CAN0 Receive CANID 11Bit  Can0Rec0data[45][0]-Can0Rec0data[45][7]
-#define REC_CAN0ID_46  47 //CAN0 Receive CANID 11Bit  Can0Rec0data[46][0]-Can0Rec0data[46][7]
-#define REC_CAN0ID_47  48 //CAN0 Receive CANID 11Bit  Can0Rec0data[47][0]-Can0Rec0data[47][7]
-#define REC_CAN0ID_48  49 //CAN0 Receive CANID 11Bit  Can0Rec0data[48][0]-Can0Rec0data[48][7]
-#define REC_CAN0ID_49  50 //CAN0 Receive CANID 11Bit  Can0Rec0data[49][0]-Can0Rec0data[49][7]
-#define REC_CAN0ID_50  51 //CAN0 Receive CANID 11Bit  Can0Rec0data[50][0]-Can0Rec0data[50][7]
-#define REC_CAN0ID_51  52 //CAN0 Receive CANID 11Bit  Can0Rec0data[51][0]-Can0Rec0data[51][7]
-#define REC_CAN0ID_52  53 //CAN0 Receive CANID 11Bit  Can0Rec0data[52][0]-Can0Rec0data[52][7]
-#define REC_CAN0ID_53  54 //CAN0 Receive CANID 11Bit  Can0Rec0data[53][0]-Can0Rec0data[53][7]
-#define REC_CAN0ID_54  55 //CAN1 Receive CANID 11Bit  Can0Rec0data[54][0]-Can0Rec0data[54][7]
-#define REC_CAN0ID_55  56 //CAN0 Receive CANID 11Bit  Can0Rec0data[55][0]-Can0Rec0data[55][7]
-#define REC_CAN0ID_56  57 //CAN0 Receive CANID 11Bit  Can0Rec0data[56][0]-Can0Rec0data[56][7]
-#define REC_CAN0ID_57  58 //CAN0 Receive CANID 11Bit  Can0Rec0data[57][0]-Can0Rec0data[57][7]
-#define REC_CAN0ID_58  59 //CAN0 Receive CANID 11Bit  Can0Rec0data[58][0]-Can0Rec0data[58][7]
-#define REC_CAN0ID_59  60 //CAN0 Receive CANID 11Bit  Can0Rec0data[59][0]-Can0Rec0data[59][7]
-#define REC_CAN0ID_60  61 //CAN0 Receive CANID 11Bit  Can0Rec0data[60][0]-Can0Rec0data[60][7]
-#define REC_CAN0ID_61  62 //CAN0 Receive CANID 11Bit  Can0Rec0data[61][0]-Can0Rec0data[61][7]
-#define REC_CAN0ID_62  63 //CAN0 Receive CANID 11Bit  Can0Rec0data[62][0]-Can0Rec0data[62][7]
-#define REC_CAN0ID_63  64 //CAN0 Receive CANID 11Bit  Can0Rec0data[63][0]-Can0Rec0data[63][7]
 
+/*CAN0接控制CAN，获取毫米波雷达、MB摄像头数据，控制器从CAN0对外发调试数据
+  CAN1接  整车KAN，获取车速和方向盘转角信息*/
+/*-------------------------------CAN0 接受ID地址--------------------------------*/
+#define REC_CAN0ID_0   0x118  //整车制动踏板状态ID    CAN0 Receive CANID 11Bit  Can0Rec0data[0][0]-Can0Rec0data[0][7]
+#define REC_CAN0ID_1   0x126  //毫米波雷达ID    CAN0 Receive CANID 11Bit  Can0Rec0data[1][0]-Can0Rec0data[1][7]
+#define REC_CAN0ID_2   0x130  //CAN0 Receive CANID 11Bit  Can0Rec0data[2][0]-Can0Rec0data[2][7]
+#define REC_CAN0ID_3   3      //CAN0 Receive CANID 11Bit  Can0Rec0data[3][0]-Can0Rec0data[3][7]
+#define REC_CAN0ID_4   4      //CAN0 Receive CANID 11Bit  Can0Rec0data[4][0]-Can0Rec0data[4][7]
+#define REC_CAN0ID_5   0x16E  //MB摄像头ID     CAN0 Receive CANID 11Bit  Can0Rec0data[5][0]-Can0Rec0data[5][7]
+#define REC_CAN0ID_6   0x119  //MB摄像头ID     CAN0 Receive CANID 11Bit  Can0Rec0data[6][0]-Can0Rec0data[6][7]
+#define REC_CAN0ID_7   0x70      //MB摄像头ID     CAN0 Receive CANID 11Bit  Can0Rec0data[7][0]-Can0Rec0data[7][7]
+#define REC_CAN0ID_8   0x279  //APA制动请求
+#define REC_CAN0ID_9   0x278  //MB摄像头ID
+#define REC_CAN0ID_10  10     //MB摄像头ID
+#define REC_CAN0ID_11  11     //MB摄像头ID
+#define REC_CAN0ID_12  12     //MB摄像头ID
+#define REC_CAN0ID_13  13
+#define REC_CAN0ID_14  13
+#define REC_CAN0ID_15  15
+#define REC_CAN0ID_16  16
+#define REC_CAN0ID_17  17
+#define REC_CAN0ID_18  18
+#define REC_CAN0ID_19  19
+#define REC_CAN0ID_20  20
+#define REC_CAN0ID_21  21
+#define REC_CAN0ID_22  22
+#define REC_CAN0ID_23  23
+#define REC_CAN0ID_24  24
+#define REC_CAN0ID_25  25
+#define REC_CAN0ID_26  26
+#define REC_CAN0ID_27  27
+#define REC_CAN0ID_28  28
+#define REC_CAN0ID_29  29
+#define REC_CAN0ID_30  30
+#define REC_CAN0ID_31  31
+#define REC_CAN0ID_32  32
+#define REC_CAN0ID_33  33
+#define REC_CAN0ID_34  34
+#define REC_CAN0ID_35  35
+#define REC_CAN0ID_36  36
+#define REC_CAN0ID_37  37
+#define REC_CAN0ID_38  38
+#define REC_CAN0ID_39  39
+#define REC_CAN0ID_40  40
+#define REC_CAN0ID_41  41
+#define REC_CAN0ID_42  42
+#define REC_CAN0ID_43  43
+#define REC_CAN0ID_44  44
+#define REC_CAN0ID_45  45
+#define REC_CAN0ID_46  46
+#define REC_CAN0ID_47  47
+#define REC_CAN0ID_48  48
+#define REC_CAN0ID_49  49
+#define REC_CAN0ID_50  50
+#define REC_CAN0ID_51  51
+#define REC_CAN0ID_52  52
+#define REC_CAN0ID_53  53
+#define REC_CAN0ID_54  54
+#define REC_CAN0ID_55  55
+#define REC_CAN0ID_56  56
+#define REC_CAN0ID_57  57
+#define REC_CAN0ID_58  58
+#define REC_CAN0ID_59  59
+#define REC_CAN0ID_60  60
+#define REC_CAN0ID_61  61
+#define REC_CAN0ID_62  62
+#define REC_CAN0ID_63  63
+#define REC_CAN0ID_64  64
 
-#define REC_CAN1ID_0   1  //CAN1 Receive CANID 11Bit  Can1Recdata[0][0]-Can1Recdata[0][7]
-#define REC_CAN1ID_1   2  //CAN1 Receive CANID 11Bit  Can1Recdata[1][0]-Can1Recdata[1][7]
-#define REC_CAN1ID_2   3  //CAN1 Receive CANID 11Bit  Can1Recdata[2][0]-Can1Recdata[2][7]
-#define REC_CAN1ID_3   4  //CAN1 Receive CANID 11Bit  Can1Recdata[3][0]-Can1Recdata[3][7]
-#define REC_CAN1ID_4   5  //CAN1 Receive CANID 11Bit  Can1Recdata[4][0]-Can1Recdata[4][7]
+/*-------------------------------CAN1 接受ID地址--------------------------------*/
+#define REC_CAN1ID_0   0x1E5 //方向盘转角ID  CAN1 Receive CANID 11Bit  Can1Recdata[0][0]-Can1Recdata[0][7]
+#define REC_CAN1ID_1   0x348 //车速ID      CAN1 Receive CANID 11Bit  Can1Recdata[1][0]-Can1Recdata[1][7]
+#define REC_CAN1ID_2   2     //           CAN1 Receive CANID 11Bit  Can1Recdata[2][0]-Can1Recdata[2][7]
+#define REC_CAN1ID_3   3     //           CAN1 Receive CANID 11Bit  Can1Recdata[3][0]-Can1Recdata[3][7]
+#define REC_CAN1ID_4   4     //线控制动ID    CAN1 Receive CANID 11Bit  Can1Recdata[4][0]-Can1Recdata[4][7]
 #define REC_CAN1ID_5   6  //CAN1 Receive CANID 11Bit  Can1Recdata[5][0]-Can1Recdata[5][7]
 #define REC_CAN1ID_6   7  //CAN1 Receive CANID 11Bit  Can1Recdata[6][0]-Can1Recdata[6][7]
 #define REC_CAN1ID_7   8  //CAN1 Receive CANID 11Bit  Can1Recdata[7][0]-Can1Recdata[7][7]
 #define REC_CAN1ID_8   9  //CAN1 Receive CANID 11Bit  Can1Recdata[8][0]-Can1Recdata[8][7]
 #define REC_CAN1ID_9   10 //CAN1 Receive CANID 11Bit  Can1Recdata[9][0]-Can1Recdata[9][7]
 
+/*-------------------------------CAN0 发送ID地址--------------------------------*/
+#define TRS_CAN0ID_0   0   //CAN1 MessageObject4 CANID 11Bit  Can1Revdata[0][0]-Can1Revdata[0][7]
+#define TRS_CAN0ID_1   0x16C   //CAN1 MessageObject5 CANID 11Bit  Can1Revdata[1][0]-Can1Revdata[1][7]
+//#define TRS_CAN0ID_1   0x94   //CAN1 MessageObject5 CANID 11Bit  Can1Revdata[1][0]-Can1Revdata[1][7]
+//#define TRS_CAN0ID_2   0x95   //CAN1 MessageObject6 CANID 11Bit  Can1Revdata[2][0]-Can1Revdata[2][7]
+#define TRS_CAN0ID_2   0x16A   //CAN1 MessageObject6 CANID 11Bit  Can1Revdata[2][0]-Can1Revdata[2][7]
+//#define TRS_CAN0ID_3   0x96   //CAN1 MessageObject7 CANID 11Bit  Can1Revdata[3][0]-Can1Revdata[3][7]
+#define TRS_CAN0ID_3   0x16F   //CAN1 MessageObject7 CANID 11Bit  Can1Revdata[3][0]-Can1Revdata[3][7]
+//#define TRS_CAN0ID_4   0x97   //CAN1 MessageObject8 CANID 11Bit  Rev
+//#define TRS_CAN0ID_5   0x16A   //CAN1 MessageObject9 CANID 11Bit  Rev
 
-#define TRS_CAN1ID_0   1   //CAN1 MessageObject10 CANID 11Bit  Can1Revdata[0][0]-Can1Revdata[0][7]
-#define TRS_CAN1ID_1   2   //CAN1 MessageObject11 CANID 11Bit  Can1Revdata[1][0]-Can1Revdata[1][7]
-#define TRS_CAN1ID_2   3   //CAN1 MessageObject12 CANID 11Bit  Can1Revdata[2][0]-Can1Revdata[2][7]
-#define TRS_CAN1ID_3   4   //CAN1 MessageObject13 CANID 11Bit  Can1Revdata[3][0]-Can1Revdata[3][7]
-#define TRS_CAN1ID_4   5   //CAN1 MessageObject14 CANID 11Bit  Rev
-#define TRS_CAN1ID_5   6   //CAN1 MessageObject15 CANID 11Bit  Rev
+/*-------------------------------CAN1 发送ID地址--------------------------------*/
+#define TRS_CAN1ID_0   0   //CAN1 MessageObject10 CANID 11Bit  Can1Revdata[0][0]-Can1Revdata[0][7]
+#define TRS_CAN1ID_1   0   //CAN1 MessageObject11 CANID 11Bit  Can1Revdata[1][0]-Can1Revdata[1][7]
+#define TRS_CAN1ID_2   0   //CAN1 MessageObject12 CANID 11Bit  Can1Revdata[2][0]-Can1Revdata[2][7]
+#define TRS_CAN1ID_3   0   //CAN1 MessageObject13 CANID 11Bit  Can1Revdata[3][0]-Can1Revdata[3][7]
+#define TRS_CAN1ID_4   0   //CAN1 MessageObject14 CANID 11Bit  Rev
+#define TRS_CAN1ID_5   0   //CAN1 MessageObject15 CANID 11Bit  Rev
 
-#define TRS_CAN0ID_0  1    //CAN0 MessageObject4 CANID 11Bit  Can0Revdata[0][0]-Can0Revdata[0][7]
-#define TRS_CAN0ID_1   2   //CAN0 MessageObject5 CANID 11Bit  Can0Revdata[1][0]-Can0Revdata[1][7]
-#define TRS_CAN0ID_2   3   //CAN0 MessageObject6 CANID 11Bit  Can0Revdata[2][0]-Can0Revdata[2][7]
-#define TRS_CAN0ID_3   4   //CAN0 MessageObject7 CANID 11Bit  Can0Revdata[3][0]-Can0Revdata[3][7]
-#define TRS_CAN0ID_4   5   //CAN0 MessageObject8 CANID 11Bit  Rev
-#define TRS_CAN0ID_5   6   //CAN0 MessageObject9 CANID 11Bit  Rev
 
 
 #define CAN0TRS0_ENABLE  0 //使能TRS_CAN0ID_0报文发送   1enable 0disable
-#define CAN0TRS1_ENABLE  0 //使能TRS_CAN0ID_1报文发送   1enable 0disable
-#define CAN0TRS2_ENABLE  0 //使能TRS_CAN0ID_2报文发送   1enable 0disable
-#define CAN0TRS3_ENABLE  0 //使能TRS_CAN0ID_3报文发送   1enable 0disable
+#define CAN0TRS1_ENABLE  1 //使能TRS_CAN0ID_1报文发送   1enable 0disable
+#define CAN0TRS2_ENABLE  1 //使能TRS_CAN0ID_2报文发送   1enable 0disable
+#define CAN0TRS3_ENABLE  1 //使能TRS_CAN0ID_3报文发送   1enable 0disable
 #define CAN0TRS4_ENABLE  0 //使能TRS_CAN0ID_4报文发送   1enable 0disable
 #define CAN0TRS5_ENABLE  0 //使能TRS_CAN0ID_5报文发送   1enable 0disable
 
@@ -133,6 +145,70 @@ BUS_LINE_EXT INT16U    CAN1ID_u16_Sig; //CAN1 接收ID变量
 BUS_LINE_EXT INT16U    Can0ID_u16a64_Sig[64];//CAN0 接收ID数组，用于存放64个CANID；如ID增加了需要修改此数值大小
 BUS_LINE_EXT INT16U    Can1ID_u16a10_Sig[10];//CAN1 接收ID数组，用于存放10个CANID；如ID增加了需要修改此数值大小
 
+/*************************************************************/
+/*                         CAN发送参数定义                   */
+/*************************************************************/
+BUS_LINE_EXT INT16S PedalLocation_CAN;       //踏板行程值
+BUS_LINE_EXT INT16S PedalForce_CAN;          //踏板力值
+BUS_LINE_EXT INT16S Set_Cylinder_CAN;        //主缸推杆行程
+BUS_LINE_EXT INT16S CylinderLocation_CAN;    //主缸推杆行程
+BUS_LINE_EXT INT16S MasterCylinderPrs_CAN;   //主缸压力
+BUS_LINE_EXT INT16S MotorCurrent_CAN;        //电机电流
+BUS_LINE_EXT INT16S Tempreture_CAN;          //温度
+BUS_LINE_EXT INT16S SetPrs_CAN;              //目标压力
+BUS_LINE_EXT INT16S PedalSpeed_CAN;          //踏板推杆速度
+BUS_LINE_EXT INT16S PedalSpeedFlag_CAN;      //踏板推杆速度符号位
+BUS_LINE_EXT INT16S Set_Current_CAN;         //目标电流
+BUS_LINE_EXT INT16S motorDuty_CAN;           //占空比
+BUS_LINE_EXT INT16S m_iPWMP_CAN;             //比例项
+BUS_LINE_EXT INT16S m_iPWMI_CAN;             //积分项
+BUS_LINE_EXT INT16S m_iPWMD_CAN;             //微分项
+BUS_LINE_EXT INT16S MCTimer;                 //芯片时间
+BUS_LINE_EXT INT16S feedBackCurrent_CAN;
+BUS_LINE_EXT INT16S ExCurrent_CAN;
+BUS_LINE_EXT INT16S FrcCylinder_CAN;
+BUS_LINE_EXT INT16S CarMotorCurrent_CAN;
+BUS_LINE_EXT INT16S Current_AD_CAN;
+BUS_LINE_EXT INT16S m_iPWMP_CAN_POS;             //比例项
+BUS_LINE_EXT INT16S m_iPWMI_CAN_POS;             //积分项
+BUS_LINE_EXT INT16S m_iPWMD_CAN_POS;             //微分项
+BUS_LINE_EXT INT16S m_iPWMD_CAN_POS;
+BUS_LINE_EXT INT16S m_iPWMD_CAN_CreCurrent;
+BUS_LINE_EXT INT16S SetCurrent_CAN;             //位置标定的目标电流曲线
+BUS_LINE_EXT INT16S TargetCurrent_CAN;
+BUS_LINE_EXT INT16S Receive_ACC;
+BUS_LINE_EXT INT16S Tx_ACC;
+
+
+
+/*-----------制动能量回收----------*/
+BUS_LINE_EXT INT16S VCU_BrkPdlSts;           //踏板制动状态
+BUS_LINE_EXT INT16S VCU_MotToqReq;           //动力电机制动请求
+BUS_LINE_EXT INT16S VCU_VehOperatingMd;      //车辆能量模式01纯点  02混动  03燃油
+BUS_LINE_EXT INT16S MCU_MotActuToq;          //电机当前制动扭矩
+BUS_LINE_EXT INT16S MCU_MotToqLmt;           //电机允许最大扭矩（为负值）
+BUS_LINE_EXT INT16S VCU_VehicleSpeed;        //整车车速信息
+BUS_LINE_EXT INT16S MCU_MotActuSpd;          //
+BUS_LINE_EXT INT8U VCU_AllowFeedbackFlag;   //允许回收状态位
+BUS_LINE_EXT INT8U iCAS_BrakeFlagBit;       //刹车状态位
+BUS_LINE_EXT INT8U iCAS_MotorState;         //电机状态位
+BUS_LINE_EXT INT8U iCAS_BrakeFault_Level;   //制动故障等级
+BUS_LINE_EXT INT8U APA_BrakeFlag;           //自主泊车请求标志位
+BUS_LINE_EXT INT8U APA_FeedBackFlag;        //自主泊车返回标志位
+BUS_LINE_EXT INT8U APA_FeedBackValue;       //自主泊车返回值
+BUS_LINE_EXT INT8U APA_TargetPrs;           //自主泊车压力请求
+BUS_LINE_EXT INT8U APA_EmgBrakeFlag;        //APA_紧急制动标志
+BUS_LINE_EXT INT16U APA_Count;
+
+
+BUS_LINE_EXT INT16S Test_toqRequest;
+BUS_LINE_EXT FP32 Test_fricbrakeCylinder;
+BUS_LINE_EXT FP32 Test_target_Cylinder;
+BUS_LINE_EXT INT16S Test_BrakeToqRequest;
+BUS_LINE_EXT INT16S BrakeState_CAN;
+BUS_LINE_EXT INT16S Test_cof_CAN;
+BUS_LINE_EXT INT16S Test_u_CAN;
+BUS_LINE_EXT INT16S Test_BrakeCount_CAN;
 
 
 

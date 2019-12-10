@@ -135,9 +135,12 @@ void MAIN_vChangeFreq(void);
 #include  "adsample.h"
 #include  "Fun.h"
 #include  "ccp_interface.h"
+#include  "aeb.h"
+#include  "iCasBrake.h"
 #include  "eepRom.h"
 #include  "adc.h"
 #include  "FLTD.h"
+#include "can_com.h"
 // USER CODE END
 
 

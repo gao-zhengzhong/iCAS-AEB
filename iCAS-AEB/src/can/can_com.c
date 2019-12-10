@@ -24,6 +24,8 @@
 #include "adc.h"
 #include "can.h"
 #include "can_com.h"
+#include "adsample.h"
+#include "FLTD.h"
 
 #define CAN_COM_GLOBALS
 
@@ -39,6 +41,7 @@ CAN_COM_STAT INT16U Can0ID_u16a64_Sig[CAN0ID_NUM] = {
 	REC_CAN0ID_16,REC_CAN0ID_17,REC_CAN0ID_18,REC_CAN0ID_19,REC_CAN0ID_20,REC_CAN0ID_21,REC_CAN0ID_22,REC_CAN0ID_23,
 	REC_CAN0ID_24,REC_CAN0ID_25,REC_CAN0ID_26,REC_CAN0ID_27,REC_CAN0ID_28,REC_CAN0ID_29,REC_CAN0ID_30,REC_CAN0ID_31,
 	REC_CAN0ID_32,REC_CAN0ID_33,REC_CAN0ID_34,REC_CAN0ID_35,REC_CAN0ID_36,REC_CAN0ID_37,REC_CAN0ID_38,REC_CAN0ID_39,
+	REC_CAN0ID_40,REC_CAN0ID_41,REC_CAN0ID_42,REC_CAN0ID_43,REC_CAN0ID_44,REC_CAN0ID_45,REC_CAN0ID_46,REC_CAN0ID_47,
 	REC_CAN0ID_48,REC_CAN0ID_49,REC_CAN0ID_50,REC_CAN0ID_51,REC_CAN0ID_52,REC_CAN0ID_53,REC_CAN0ID_54,REC_CAN0ID_55,
 	REC_CAN0ID_56,REC_CAN0ID_57,REC_CAN0ID_58,REC_CAN0ID_59,REC_CAN0ID_60,REC_CAN0ID_61,REC_CAN0ID_62,REC_CAN0ID_63
 };
@@ -246,6 +249,26 @@ void CanCom_Can1RecDeal(void)
 void CanCom_CanTx(void)
 {
 	CAN_COM_STAT INT8U CycleSchedCnt = 0u;
+	const T_ADC *ptr = Adc_SampleData();
+	
+#if 0		
+	*(INT16U*)&Can0Revdata[0][0] = ptr->powerVoltage_Adc | (FLTD_GetAdcRangeType(FLTD_ADC_ECU_VOLTAGE) << 12);
+	*(INT16U*)&Can0Revdata[0][2] = ptr->temperatureValue_Adc | (FLTD_GetAdcRangeType(FLTD_ADC_ENV_TEMPERATURE) << 12);
+	*(INT16U*)&Can0Revdata[0][4] = ptr->brakePedalVoltage_Adc | (FLTD_GetAdcRangeType(FLTD_ADC_PEDAL_SENSOR_VOLTAGE) << 12);
+	*(INT16U*)&Can0Revdata[0][6] = ptr->brakePedalTrip_Adc[0] | (FLTD_GetAdcRangeType(FLTD_ADC_PEDAL_SENSOR_SIG1) << 12);
+	*(INT16U*)&Can0Revdata[1][0] = ptr->brakePedalTrip_Adc[1] | (FLTD_GetAdcRangeType(FLTD_ADC_PEDAL_SENSOR_SIG2) << 12);
+	*(INT16U*)&Can0Revdata[1][2] = ptr->brakePedalTrip_Adc[2];
+	*(INT16U*)&Can0Revdata[1][4] = ptr->mainCylinderVoltage_Adc | (FLTD_GetAdcRangeType(FLTD_ADC_MAIN_CYLINDER_VOLTAGE) << 12);
+	*(INT16U*)&Can0Revdata[1][6] = ptr->mainCylinderTrip_Adc[0] | (FLTD_GetAdcRangeType(FLTD_ADC_MAIN_CYLINDER_SIG1) << 12);
+	*(INT16U*)&Can0Revdata[2][0] = ptr->mainCylinderTrip_Adc[1] | (FLTD_GetAdcRangeType(FLTD_ADC_MAIN_CYLINDER_SIG2) << 12);
+	*(INT16U*)&Can0Revdata[2][2] = ptr->mainCylinderTrip_Adc[2];
+	*(INT16U*)&Can0Revdata[2][4] = ptr->motorCurrent_Adc | (FLTD_GetAdcRangeType(FLTD_ADC_CURRENT_SENSOR_SIG) << 12);
+	*(INT16U*)&Can0Revdata[2][6] = ptr->motorVLinkVoltage_Adc | (FLTD_GetAdcRangeType(FLTD_ADC_VLINK_VOLTAGE) << 12);
+	*(INT16U*)&Can0Revdata[3][0] = ptr->motorPhaseVoltage_Adc[0] | (FLTD_GetAdcRangeType(FLTD_ADC_A_PHASE_VOLTAGE) << 12);
+	*(INT16U*)&Can0Revdata[3][2] = ptr->motorPhaseVoltage_Adc[1] | (FLTD_GetAdcRangeType(FLTD_ADC_B_PHASE_VOLTAGE) << 12);
+	*(INT16U*)&Can0Revdata[3][4] = ptr->pressureSensorVoltage_Adc | (FLTD_GetAdcRangeType(FLTD_ADC_PRESSURE_SENSOR_VOLTAGE) << 12);
+	*(INT16U*)&Can0Revdata[3][6] = ptr->mainCylinderPressure_Adc | (FLTD_GetAdcRangeType(FLTD_ADC_PRESSURE_SENSOR_SIG) << 12);
+#endif
 	
 	CycleSchedCnt++;
 	
@@ -253,12 +276,12 @@ void CanCom_CanTx(void)
 	{
 		case 1:
 #if( 1 == CAN0TRS0_ENABLE )
-			CAN_MOAR4H = (TRS_CAN0ID_0 << 2u);
+			CAN_MOAR4H = 0x8000 + (TRS_CAN0ID_0 << 2u);
 			CAN_MOAR4L = 0x0000;
 			CanCom_SendMsg(4,&Can0Revdata[0][0],8);
 #endif		
 #if( 1 == CAN1TRS0_ENABLE )
-			CAN_MOAR10H = (TRS_CAN1ID_0 << 2u);
+			CAN_MOAR10H = 0x8000 + (TRS_CAN1ID_0 << 2u);
 			CAN_MOAR10L = 0x0000;
 			CanCom_SendMsg(10,&Can1Revdata[0][0],8);
 #endif		
@@ -266,12 +289,12 @@ void CanCom_CanTx(void)
 		
 		case 2:
 #if( 1 == CAN0TRS1_ENABLE )
-			CAN_MOAR5H = (TRS_CAN0ID_1 << 2u);
+			CAN_MOAR5H = 0x8000 + (TRS_CAN0ID_1 << 2u);
 			CAN_MOAR5L = 0x0000;
 			CanCom_SendMsg(5,&Can0Revdata[1][0],8);
 #endif
 #if( 1 == CAN1TRS1_ENABLE )
-			CAN_MOAR11H = (TRS_CAN1ID_1 << 2u);
+			CAN_MOAR11H = 0x8000 + (TRS_CAN1ID_1 << 2u);
 			CAN_MOAR11L = 0x0000;
 			CanCom_SendMsg(11,&Can1Revdata[1][0],8);
 #endif		
@@ -279,12 +302,12 @@ void CanCom_CanTx(void)
 		
 		case 3:
 #if( 1 == CAN0TRS2_ENABLE )
-			CAN_MOAR6H = (TRS_CAN0ID_2 << 2u);
+			CAN_MOAR6H = 0x8000 + (TRS_CAN0ID_2 << 2u);
 			CAN_MOAR6L = 0x0000;
 			CanCom_SendMsg(6,&Can0Revdata[2][0],8);
 #endif
 #if( 1 == CAN1TRS2_ENABLE )
-			CAN_MOAR12H = (TRS_CAN1ID_2 << 2u);
+			CAN_MOAR12H = 0x8000 + (TRS_CAN1ID_2 << 2u);
 			CAN_MOAR12L = 0x0000;
 			CanCom_SendMsg(12,&Can1Revdata[2][0],8);
 #endif			
@@ -292,12 +315,12 @@ void CanCom_CanTx(void)
 		
 		case 4:
 #if( 1 == CAN0TRS3_ENABLE )
-			CAN_MOAR7H = (TRS_CAN0ID_3 << 2u);
+			CAN_MOAR7H = 0x8000 + (TRS_CAN0ID_3 << 2u);
 			CAN_MOAR7L = 0x0000;
 			CanCom_SendMsg(7,&Can0Revdata[3][0],8);
 #endif
 #if( 1 == CAN1TRS3_ENABLE )
-			CAN_MOAR13H = (TRS_CAN1ID_3 << 2u);
+			CAN_MOAR13H = 0x8000 + (TRS_CAN1ID_3 << 2u);
 			CAN_MOAR13L = 0x0000;
 			CanCom_SendMsg(13,&Can1Revdata[3][0],8);
 #endif

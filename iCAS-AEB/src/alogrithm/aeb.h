@@ -1,160 +1,142 @@
-/***********************************************************************
-*   Copyright (C) JWD Automotive Co., Ltd.				                     * 
-*		All Rights Reserved.          					                           *
-*   Department : iCAS SW      									                       *
-*   AUTHOR	   :            										                       *
-************************************************************************
-* Object        : 
-* Module        : aeb.h
-* Instance      : 
-* Description   : aeb brake algorithm
-*-----------------------------------------------------------------------
-* Version: v0.1
-* Date   : Dec 8,2019 
-* Author : Gao zehngzhong
-***********************************************************************/
-/*-History--------------------------------------------------------------
-* Version    Date           Name            Changes and comments
-------------------------------------------------------------------------
-* 0.1	       Dec 8,2019     Gao Zhengzhong  Initial version
-*=====================================================================*/
+/*
+ * aeb.h
+ *
+ *  Created on: 2019-5-30
+ *      Author: lp
+ */
 
-#ifndef _AEB_H_
-#define _AEB_H_
+#ifndef AEB_H_
+#define AEB_H_
 
-#include "Para_Fun_Type.h"
-#include "rtwtypes.h"
+#define calc_t   55
 
 #ifdef   AEB_GLOBALS
 	#define  AEB_EXT
 #else
 	#define  AEB_EXT  extern
 #endif
-	
-#ifdef   AEB_GLOBALS
-	#define  AEB_STAT
-#else
-	#define  AEB_STAT static
-#endif	
 
-/* AEB function switch setting */
-#ifndef AEB_DET_DISTANCE
-	#define AEB_DET_DISTANCE ENABLE
-#endif
 
-#ifndef AEB_DET_VELOCITY
-	#define AEB_DET_VELOCITY ENABLE
-#endif
 
-#ifndef AEB_DET_RRAODRADIUS
-	#define AEB_DET_RRAODRADIUS ENABLE
-#endif
 
-#ifndef AEB_DET_GEAR
-	#define AEB_DET_GEAR ENABLE
-#endif
+/****************lp argument begin***********/
+// sensor data 01
+AEB_EXT INT8U  ObjNum,  ASR_DataIndex, CountNumberRadar;
+AEB_EXT INT16S RealAngle,distance_long, distance_lateral;
+AEB_EXT INT16U VechileSpeed, testCount;
+AEB_EXT INT16U TargetPressure,AutoMode,AutoBrakeEnable;
+AEB_EXT FP32   speed_longtitude, speed_lateral;
 
-#ifndef AEB_DET_TURNLAMP
-	#define AEB_DET_TURNLAMP ENABLE
-#endif
+//aeb data 02
+AEB_EXT INT8U  isSpeedSatf, isSteering, phase, State_max, AEB_State_now, \
+               SpeedStandbyCount, Status, IsCondSatis, Aeb_targetpress_value;
+AEB_EXT INT16U add_pressure, speed_time, temp01 , test05;
+AEB_EXT FP32   v_ego, v_rel, speed_front, pres_max, pres_min, prec, TTC, dis_rel,\
+               dis_real, dis_brake, acce_present, Ep_add, prec;
 
-#ifndef AEB_DET_STEERING
-	#define AEB_DET_STEERING ENABLE
-#endif
+// data array
+AEB_EXT FP32   v_d[calc_t], pres_d[calc_t], acce_d[calc_t],lca_d[calc_t],\
+               pres_s[calc_t],acce_s[calc_t], EP[2];
+AEB_EXT INT16U speed_time_d[calc_t];
+AEB_EXT INT8U  AEB_S_array[2];
 
-#ifndef AEB_DET_DRIVER_BRAKE
-	#define AEB_DET_DRIVER_BRAKE ENABLE
-#endif
+// array pointer
+AEB_EXT FP32 * pv, * pp , * pa, * p_t, ** p_p, *pl,* p_array[2], * p_ep;
+AEB_EXT INT8U * p_aeb_s;
 
-#ifndef AEB_DET_BRAKE_PEDAL
-	#define AEB_DET_BRAKE_PEDAL ENABLE
-#endif
+// radar data structure 01
+typedef struct ars_o_status{
+	INT8U Object_NofObjects;
+	INT16U Object_MeasCounter;
+	INT8U Object_InterfaceVersion;
+} ars_o_status_01;
+AEB_EXT ars_o_status_01 ars_ob_status;
 
-/**** Definition of macro ****/
-#define AEB_STANDBY_TIMEOUT     (30u)
-#define AEB_PROHIBIT_TIMEOUT    (30u)
+// radar data structure 02
+typedef struct arsObject{
+	INT8U id;
+	INT16S Obj_DistLong;
+	INT16S Obj_DistLat;
+	INT16S Obj_VrelLong;
+	INT16S Obj_VrelLat;
+	INT8U Obj_DynProp;
+}arsObject1;
+AEB_EXT arsObject1 ars_Object;
 
-#define AEB_DISTANCE_MAX      (12000u) // uint:m * 100
+// acceleration and yaw data structure
+typedef struct acceleration{
+	FP32 acceleration_x;
+	INT16S acceleration_y;
+	FP32 acceleration_z;
+	FP32 yaw_rate;
+	INT16U acce_y;
+}acceleration01;
 
-#define AEB_RELATIVE_DISTANCE_THRESHOLD  (80.0f)
+/*Mobileye*/
+typedef struct Lane
+{
+	INT16S id;
+	FP32 c0, c1, c2, c3;
+	INT16S laneType;
+	INT16S laneQuality;
+	INT16S modelDegree;
+    FP32 leftMarkingWidth;
+    FP32 viewRange;
+    INT16S viewRangeFlag;
+}laneLR[2];
 
-#define AEB_VELOCITY_LOWER    (5.0f)
-#define AEB_VELOCITY_UPPER    (70.0f)
+typedef struct EyeObs
+{
+	FP32 obsPosX, obsPosY;
+	FP32 obsRelativeVelX, obsRelativeVelY;
+	FP32 obsWidth, obsLength;
+	INT16S obsType, obsStatus;
+}eyeObs[64];
 
-#define AEB_ROAD_RADIUS_CURVATURE  (250u)
+AEB_EXT INT16S eyeObstacleNum;
+AEB_EXT FP32 laneLeftX;
+AEB_EXT FP32 laneRightX;
+AEB_EXT INT8U canCount769, canCount768, canCount767, canCount766;
 
-#define AEB_TTC_NO_WARNING     (20.0f)
+AEB_EXT acceleration01 acce_ego;
 
-#define AEB_STEERING_POSITIVE_ANGLE  (10)
-#define AEB_STEERING_NEGATIVE_ANGLE  (-10)
+AEB_EXT FP32 MasterCylinderPrs;
 
-#define MAIN_CYLINDER_PRESSURE_PARAM    (51.2f)
+// deposit radar information array
+AEB_EXT INT16S ObjectInfo0[4][20], ObjectInfo1[4][20];
 
-/**** Definition of data structure ****/
-typedef enum{
-	X_Gear,
-	P_Gear,
-	R_Gear,
-	N_Gear,
-	D_Gear
-}E_GEAR_POSITION;
+// Aeb的刹车使能状态位
+AEB_EXT INT8U  BrakeSysMode;
+AEB_EXT INT16U  AebStandtime;
+AEB_EXT INT8U  AebStandMode;//
+AEB_EXT INT8U  SteerInterSta;//转向干预状态
 
-typedef enum{
-	EXTINCT,
-	LEFT,
-	RIGHT,
-	DOUBLE_FLASH
-}E_TURN_LAMP;
+#define EmrgBrake_TtcL    5.0
+#define InterBrake_TtcL    10.0
+#define PreBrake_TtcL    15.0
 
-typedef enum{
-	DISTANCE,
-	VELOCITY,
-	ROAD_RADIUS,
-	GEAR,
-	TURN_LAMP,
-	STEERING,
-	DRIVER_BRAKE,
-	BRAKE_PEDAL,
-	MAX_RESTRICT_CONDITION
-}E_RESTRICT_CONDITION;
+/********************function Declaration**************/
+void   AebAlgorithm(void);
+void   FindDangerObject_lp(void);
+void   AebInit(void);
+void   sort(FP32 * data, INT16U n);
+FP32   mean_array(FP32 * p, INT16U n, INT16U m);
+INT16S round(FP32 t);
+FP32   MAX(FP32 a, FP32 b);
+INT16S MAX_int(INT16S a, INT16S b);
+INT16U calc_state(FP32 v, FP32 v_rel, FP32 dis_rel);
+FP32   ABS_lp(FP32 a);
+void   getInfo(void);
+void   calc_ttc(FP32 v_rel,FP32 dis_rel);
+FP32 **pa_sort(void);
+INT8U  IsSpeedStandby(void);
+INT8U  IsSWStandBy(void);
+void   resumeFunc(void);
+INT8U  CondFunc(void);
+FP32   accury_calc(void);
+FP32   pres_p(void);
+FP32   calc_ep(void);
+void   AedBrake(void);
 
-typedef struct{
-	/* target infromation from can bus */
-	INT16S targetLongtitudeDistance;
-	INT16S targetLateralDistance;
-	
-	FP32 targetLongtitudeVelocity;
-	FP32 targetLateralVelocity;
-	
-	/* vehicle information from can bus */
-	FP32 vehicleVelocity;
-	FP32 vehicleAcceleration;
-	
-	FP32 relativeVelocity;
-	FP32 relativeDistance;
-
-	INT8U turnLamp;
-	INT8U gearPosition;
-	
-	INT16S steeringAngle;	
-	INT16U roadCurvatureRadius;	
-	
-	FP32 ttc;
-	FP32 mainCylinderPressure;
-	
-	INT16U speedFront;
-	INT16U objPressure;
-	INT16S incrementalValue;
-	
-	BOOLEAN funcDisableStatus;
-	BOOLEAN driverBrakeStatus;
-	BOOLEAN brakePedalStatus;
-	BOOLEAN restrictCondition[MAX_RESTRICT_CONDITION];
-}T_AEB;
-
-/**** Declaration of functions ****/
-AEB_EXT void Aeb_Init(void);
-AEB_EXT void Aeb_DeInit(void);
-AEB_EXT void Aeb_Algorithm(void);
 
 #endif

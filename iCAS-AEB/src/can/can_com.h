@@ -120,10 +120,10 @@
 #define TRS_CAN1ID_4   5   //CAN1 MessageObject14 CANID 11Bit  Rev
 #define TRS_CAN1ID_5   6   //CAN1 MessageObject15 CANID 11Bit  Rev
 
-#define TRS_CAN0ID_0   1   //CAN0 MessageObject4 CANID 11Bit  Can0Revdata[0][0]-Can0Revdata[0][7]
-#define TRS_CAN0ID_1   2   //CAN0 MessageObject5 CANID 11Bit  Can0Revdata[1][0]-Can0Revdata[1][7]
-#define TRS_CAN0ID_2   3   //CAN0 MessageObject6 CANID 11Bit  Can0Revdata[2][0]-Can0Revdata[2][7]
-#define TRS_CAN0ID_3   4   //CAN0 MessageObject7 CANID 11Bit  Can0Revdata[3][0]-Can0Revdata[3][7]
+#define TRS_CAN0ID_0   0x666   //CAN0 MessageObject4 CANID 11Bit  Can0Revdata[0][0]-Can0Revdata[0][7]
+#define TRS_CAN0ID_1   0x667   //CAN0 MessageObject5 CANID 11Bit  Can0Revdata[1][0]-Can0Revdata[1][7]
+#define TRS_CAN0ID_2   0x668   //CAN0 MessageObject6 CANID 11Bit  Can0Revdata[2][0]-Can0Revdata[2][7]
+#define TRS_CAN0ID_3   0x669   //CAN0 MessageObject7 CANID 11Bit  Can0Revdata[3][0]-Can0Revdata[3][7]
 #define TRS_CAN0ID_4   5   //CAN0 MessageObject8 CANID 11Bit  Rev
 #define TRS_CAN0ID_5   6   //CAN0 MessageObject9 CANID 11Bit  Rev
 
@@ -147,7 +147,7 @@
 #define CAN1ID_NUM    (10) //CAN1 receive ID number
 #define CAN_DATA_NUM  (8)
 
-#if 0
+#if 1
 CAN_COM_EXT INT16U    CAN0ID_u16_Sig; 
 CAN_COM_EXT INT16U    CAN1ID_u16_Sig; 
 CAN_COM_EXT INT16U    Can0ID_u16a64_Sig[64];

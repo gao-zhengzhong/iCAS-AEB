@@ -29,15 +29,22 @@
 FUN_EXT INT8U TempValueTab[50];
 FUN_EXT FP32 TempADTab[50];
 FUN_EXT INT8U temploc;
-FUN_EXT FP32 RealTemperature;
+FUN_EXT INT8S RealTempreture;
+FUN_EXT INT8U TempDiagNum;
+FUN_EXT INT8U Curflag;
+FUN_EXT INT8U TempPtottIndex;
+FUN_EXT INT8U TempDiagflag;
+FUN_EXT INT8U TempProttNum;
+
+//TempPtottIndex
 
 /****************lp argument end***********/
 FUN_EXT INT16U PWMA_u16_Sig;//A相PWM占空比
 FUN_EXT INT16U PWMB_u16_Sig;//B相PWM占空比
 
-FUN_EXT INT8U IGStatus_v_g();//IG状态获取函数
-FUN_EXT INT8U Driver_v_g();//预驱驱动函数
+FUN_EXT INT8U  IGStatus_v_g();//IG状态获取函数
+FUN_EXT INT8U  Driver_v_g();//预驱驱动函数
 FUN_EXT INT8U FineTab(FP32 *a, INT8U TabLong, INT16U data);//温度查表定位函数
-FUN_EXT FP32 Account_temp(INT16U data);//温度计算函数
+FUN_EXT INT8S Account_temp(INT16U data);//温度计算函数
 
 #endif /* FUN_H_ */

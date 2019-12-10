@@ -51,7 +51,10 @@ void task2Fault_v_s(void);
 ****************************************************************************************/
 void task2(void)
 {
-
+	   speed_time++;
+	   if (speed_time > 1200){
+		   speed_time = 0;
+	   }
 
 	   switch(SystemMode_u8_Sig)
 		{
@@ -105,11 +108,13 @@ void task2PowerUpTest_v_s(void)
 *	@note       在Task2.c的task2()函数中调用；另外AEB算法放在此函数中
 *	@Data       2019-3-12
 ****************************************************************************************/
+INT32U testvalue11=0;
+INT32U testvalue12=0;
+INT32U testvalue13=0;
 void task2Normal_v_s(void)
 {
 /*------------------AEB功能算法--------------------*/
-
-
+	//AebAlgorithm();
 
 /*--------------------PWM赋值给底层接口----------------------------*/
 PWMA_u16_Sig=((INT32U)MotorPwm_Ctrl*2000)>>12;

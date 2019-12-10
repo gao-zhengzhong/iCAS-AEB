@@ -85,7 +85,8 @@ ISO_EXT INT8U  MaintenLevel_u8_Sig;    /* */
 ISO_EXT INT8U  FaultLevel_u8_Sig;      /* 故障等级*/
 ISO_EXT INT8U  VehicleStatus_u8_Sig;   /* */
 ISO_EXT INT8U  VehSpeedFault_u8_Sig;   /* */
-ISO_EXT INT8S  TimeBaseCounter;        /* 时序计数变量*/
+ISO_EXT INT16S  TimeBaseCounter;        /* 时序计数变量*/
+ISO_EXT INT32U Testtimenum;
 ISO_EXT INT16U DriverRampDownCnt_u16_Sig;
 
 

@@ -862,9 +862,9 @@ void CAN_vInit(void)
   ///  - priority class 2; transmit acceptance filtering is based on the CAN 
   ///    identifier
   ///  - standard 11-bit identifier
-  ///  - identifier 11-bit:      0x6F1
+  ///  - identifier 11-bit:      0x000
 
-    CAN_MOAR10H = 0x9BC4;        // load MO10 arbitration register high
+    CAN_MOAR10H = 0x8000;        // load MO10 arbitration register high
     CAN_MOAR10L = 0x0000;        // load MO10 arbitration register low
 
   ///  Configuration of Message Object 10 Data:
