@@ -251,7 +251,7 @@
               <MiscControls>MODV2</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\src\adc;.\src\alogrithm;.\src\can;.\src\ccp;.\src\diagnostic;.\src\pwm;.\Fun;.\RTW\Other;.\RTW\RTWshared;.\dave files;.\Task;.\src\eeprom</IncludePath>
+              <IncludePath>.\src\driver;.\src\interface;.\src\app\adc;.\src\app\alogrithm;.\src\app\can;.\src\app\ccp;.\src\app\diagnostic;.\src\app\mode control;.\src\app\task;.\src\app\Fun;.\src</IncludePath>
             </VariousControls>
           </C166>
           <Ec166>
@@ -299,57 +299,62 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>dave files</GroupName>
+          <GroupName>driver</GroupName>
           <Files>
             <File>
               <FileName>ADC0.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\dave files\ADC0.c</FilePath>
+              <FilePath>.\src\driver\ADC0.c</FilePath>
             </File>
             <File>
               <FileName>ADC1.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\dave files\ADC1.c</FilePath>
+              <FilePath>.\src\driver\ADC1.c</FilePath>
             </File>
             <File>
               <FileName>CAN.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\dave files\CAN.c</FilePath>
+              <FilePath>.\src\driver\CAN.c</FilePath>
             </File>
             <File>
               <FileName>CCU60.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\dave files\CCU60.c</FilePath>
+              <FilePath>.\src\driver\CCU60.c</FilePath>
             </File>
             <File>
               <FileName>CCU61.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\dave files\CCU61.c</FilePath>
+              <FilePath>.\src\driver\CCU61.c</FilePath>
             </File>
             <File>
               <FileName>GPT1.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\dave files\GPT1.c</FilePath>
+              <FilePath>.\src\driver\GPT1.c</FilePath>
             </File>
             <File>
               <FileName>GPT2.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\dave files\GPT2.c</FilePath>
+              <FilePath>.\src\driver\GPT2.c</FilePath>
             </File>
             <File>
               <FileName>IO.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\dave files\IO.c</FilePath>
+              <FilePath>.\src\driver\IO.c</FilePath>
             </File>
             <File>
               <FileName>MAIN.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\dave files\MAIN.c</FilePath>
+              <FilePath>.\src\driver\MAIN.c</FilePath>
             </File>
             <File>
               <FileName>SCS.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\dave files\SCS.c</FilePath>
+              <FilePath>.\src\driver\SCS.c</FilePath>
+            </File>
+            <File>
+              <FileName>Start_V3.A66</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\src\driver\Start_V3.A66</FilePath>
             </File>
           </Files>
         </Group>
@@ -359,32 +364,32 @@
             <File>
               <FileName>adsample.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Fun\adsample.c</FilePath>
-            </File>
-            <File>
-              <FileName>Fun.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Fun\Fun.c</FilePath>
-            </File>
-            <File>
-              <FileName>iso.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Fun\iso.c</FilePath>
+              <FilePath>.\src\app\Fun\adsample.c</FilePath>
             </File>
             <File>
               <FileName>busline.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Fun\busline.c</FilePath>
+              <FilePath>.\src\app\Fun\busline.c</FilePath>
+            </File>
+            <File>
+              <FileName>Fun.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\app\Fun\Fun.c</FilePath>
+            </File>
+            <File>
+              <FileName>iso.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\app\Fun\iso.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>RTW</GroupName>
+          <GroupName>mode</GroupName>
           <Files>
             <File>
               <FileName>ModeControl.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\RTW\Other\ModeControl.c</FilePath>
+              <FilePath>.\src\app\mode control\ModeControl.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -392,69 +397,89 @@
           <GroupName>alogrithm</GroupName>
           <Files>
             <File>
-              <FileName>booster.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\alogrithm\booster.c</FilePath>
-            </File>
-            <File>
               <FileName>aeb.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\alogrithm\aeb.c</FilePath>
+              <FilePath>.\src\app\alogrithm\aeb.c</FilePath>
+            </File>
+            <File>
+              <FileName>booster.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\app\alogrithm\booster.c</FilePath>
+            </File>
+            <File>
+              <FileName>energy_recovery.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\app\alogrithm\energy_recovery.c</FilePath>
+            </File>
+            <File>
+              <FileName>iCasBrake.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\app\alogrithm\iCasBrake.c</FilePath>
+            </File>
+            <File>
+              <FileName>pid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\app\alogrithm\pid.c</FilePath>
+            </File>
+            <File>
+              <FileName>wire_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\app\alogrithm\wire_control.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>adc</GroupName>
+          <GroupName>app</GroupName>
           <Files>
             <File>
-              <FileName>adc.c</FileName>
+              <FileName>adc_sample.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\adc\adc.c</FilePath>
+              <FilePath>.\src\app\adc\adc_sample.c</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>can</GroupName>
-          <Files>
             <File>
               <FileName>can_com.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\can\can_com.c</FilePath>
+              <FilePath>.\src\app\can\can_com.c</FilePath>
             </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>diagnostic</GroupName>
-          <Files>
-            <File>
-              <FileName>FLTD.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\diagnostic\FLTD.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>pwm</GroupName>
-          <Files>
-            <File>
-              <FileName>pwm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\pwm\pwm.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>ccp</GroupName>
-          <Files>
             <File>
               <FileName>ccp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\ccp\ccp.c</FilePath>
+              <FilePath>.\src\app\ccp\ccp.c</FilePath>
             </File>
             <File>
-              <FileName>ccp_interface.c</FileName>
+              <FileName>FLTD.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\src\ccp\ccp_interface.c</FilePath>
+              <FilePath>.\src\app\diagnostic\FLTD.c</FilePath>
+            </File>
+            <File>
+              <FileName>FLTM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\app\diagnostic\FLTM.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>interface</GroupName>
+          <Files>
+            <File>
+              <FileName>adc_if.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\interface\adc_if.c</FilePath>
+            </File>
+            <File>
+              <FileName>ccp_if.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\interface\ccp_if.c</FilePath>
+            </File>
+            <File>
+              <FileName>eepRom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\interface\eepRom.c</FilePath>
+            </File>
+            <File>
+              <FileName>pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\interface\pwm.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -462,34 +487,24 @@
           <GroupName>task</GroupName>
           <Files>
             <File>
-              <FileName>task1.c</FileName>
+              <FileName>Task1.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Task\task1.c</FilePath>
+              <FilePath>.\src\app\task\Task1.c</FilePath>
             </File>
             <File>
-              <FileName>task2.c</FileName>
+              <FileName>Task2.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Task\task2.c</FilePath>
+              <FilePath>.\src\app\task\Task2.c</FilePath>
             </File>
             <File>
-              <FileName>task3.c</FileName>
+              <FileName>Task3.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Task\task3.c</FilePath>
+              <FilePath>.\src\app\task\Task3.c</FilePath>
             </File>
             <File>
-              <FileName>task4.c</FileName>
+              <FileName>Task4.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Task\task4.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>eep</GroupName>
-          <Files>
-            <File>
-              <FileName>eepRom.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\src\eeprom\eepRom.c</FilePath>
+              <FilePath>.\src\app\task\Task4.c</FilePath>
             </File>
           </Files>
         </Group>
