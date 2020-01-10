@@ -61,6 +61,7 @@ void ISOInit_v_g(void)
 	DriverRampDownCnt_u16_Sig=0;/* IG OFF延时计数变量*/
 
 	TimeBaseCounter=-1;         /*时序计数器初始化赋值*/
+	Testtimenum = 0;
 
 	CanEnbale_v_g();            /*CAN0、CAN1 transfer使能*/
 }
@@ -78,6 +79,7 @@ void TimingSchedule_v_g(void)
 {
 
 	     TimeBaseCounter ++;/*---轮询计数器计数---*/
+	     Testtimenum++;
 		  switch (TimeBaseCounter)
 		  {
 		    case 0:

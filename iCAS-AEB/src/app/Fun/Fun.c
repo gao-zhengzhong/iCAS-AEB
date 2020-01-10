@@ -33,8 +33,13 @@ INT8U TempValueTab[50] =
 106,107,108,109,110,111,112,113,114,115,
 116,117,118,119,120,121,122,123,124,125};
 
-FP32 RealTemperature=0.0;
+//温度检测
+INT8S RealTempreture=0;
 INT8U temploc=0;
+INT8U TempDiagNum=0;
+INT8U TempDiagflag=0;
+INT8U TempPtottIndex=100;
+INT8U TempProttNum=0;
 
 /*
 *********************************************************************************************************
@@ -156,7 +161,7 @@ INT8U FineTab(FP32 *a, INT8U TabLong, INT16U data)//表中数据从大到小
 *	@Data       2019-9-6
 ****************************************************************************************/
 
-FP32 Account_temp(INT16U data)
+INT8S Account_temp(INT16U data)
 {
 	FP32 temp;
 	temp=0;
@@ -168,5 +173,5 @@ FP32 Account_temp(INT16U data)
     		(TempValueTab[temploc + 1] - TempValueTab[temploc]) + \
     		TempValueTab[temploc];
 
-    return temp;
+    return (INT8S)temp;
 }
