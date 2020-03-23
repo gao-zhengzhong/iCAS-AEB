@@ -21,6 +21,8 @@ git@github.com:gao-zhengzhong/iCAS-AEB.git
 *RC     ：此版本基本不存在导致错误的BUG
 *Release：此版本为最终交付用户使用版本
 
+2020.03.23
+版本信息：
 HW02.2.4.00.20200323_alpha
 1.实现功能：
 2.解决问题：
